@@ -14,7 +14,8 @@ lefteye_center=landmark_dic['left_eye_center']
 
 coordinate_x=lefteye_center['x']
 coordinate_y=lefteye_center['y']
-#print coordinate_x
-#print coordinate_y
+print coordinate_x
+print coordinate_y
 
-
+#mouth_upper_lip_left_contour2-mouth_lower_lip_right_contour2
+#mouth_upper_lip_left_contour1-mouth_lower_lip_right_contour3

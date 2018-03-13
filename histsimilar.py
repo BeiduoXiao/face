@@ -53,5 +53,5 @@ if __name__ == '__main__':
 	print 'test_case_%d: %.3f%%'%(i, \
 		calc_similar_by_path('TEST%d/%d.png'%(i, 1), 'TEST%d/%d.png'%(i, 2))*100)
 	
-#	make_doc_data('test/TEST4/1.JPG', 'test/TEST4/2.JPG')
+	#make_doc_data('TEST1/1.png', 'TEST1/2.png')
 
