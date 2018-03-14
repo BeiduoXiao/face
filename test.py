@@ -1,49 +1,36 @@
-#coding:utf-8
+# -*-coding:utf-8-*-
 from PIL import Image
-import matplotlib.pyplot as pl
-import numpy as np
-import lipcut
+import fppapi
+import json
+def lipcut(filepath):
 
-x=[]
-for i in range(256):
-    x.append(i)
+    apiresponse=fppapi.fppapi(filepath)
+    get_dic=json.loads(apiresponse)
+    face_list=get_dic['faces']
+    #list[0] is dict
+    list_dic=face_list[0]
+    #keys of list_dic [u'landmark', u'attributes', u'face_token', u'face_rectangle']
+    #'landmark' is a dict
+    landmark_dic=list_dic['landmark']
+    #keys of landmark_dic : all 83 landmarks https://www.faceplusplus.com.cn/landmarks/#demo
+    upperleft=landmark_dic['mouth_upper_lip_left_contour2']
+    lowerright=landmark_dic['mouth_lower_lip_right_contour3']
+    
+
+    upperleft_x=upperleft['x']
+    upperleft_y=upperleft['y']
+    
+    lowerright_x=lowerright['x']
+    lowerright_y=lowerright['y']
 
 
-path1=r"wintertest.jpg"
-path2=r"falltest.jpg"
-path3=r"summertest.jpg"
-path4=r"test.jpg"
-path5=r"summertemplate-s.png"
-size = (50,50)
 
-image1=lipcut.lipcut(path1)
-image2=lipcut.lipcut(path2)
-image3=lipcut.lipcut(path3)
-image4=lipcut.lipcut(path4)
-image5=lipcut.lipcut(path5)
+    im = Image.open(filepath)
+    region = im.crop((upperleft_x, upperleft_y, lowerright_x, lowerright_y))
+    #region是裁剪后的image对象
+    return region
+    
 
 
-image1 = image1.resize(size).convert("L")
-g = image1.histogram()
-image2 = image2.resize(size).convert("L")
-s = image2.histogram()
-image3=image3.resize(size).convert("L")
-l3=image3.histogram()
-image4=image4.resize(size).convert("L")
-l4=image4.histogram()
-image5=image5.resize(size).convert("L")
-l5=image5.histogram()
 
-pl.plot(x,g,color='green')
-pl.plot(x,s,color='red')
-pl.plot(x,l3,color='yellow')
-pl.plot(x,l4,color='black')
-pl.plot(x,l5,color='blue')
-
-pl.show()
-image1.show()
-image2.show()
-image3.show()
-image4.show()
-	
-
+    
