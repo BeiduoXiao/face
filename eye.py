@@ -8,8 +8,8 @@ import hist_similar
 import avg_similar
 #注：所有的filepath为filepath = r"photo.jpg"格式
 
-#返回裁剪出的嘴唇image对象
-def lipcut(filepath):
+#返回裁剪出的眼睛image对象
+def eyecut(filepath):
 
     apiresponse=fppapi.fppapi(filepath)
     get_dic=json.loads(apiresponse)
@@ -20,8 +20,8 @@ def lipcut(filepath):
     #'landmark' is a dict
     landmark_dic=list_dic['landmark']
     #keys of landmark_dic : all 83 landmarks https://www.faceplusplus.com.cn/landmarks/#demo
-    upperleft=landmark_dic['mouth_upper_lip_left_contour2']
-    lowerright=landmark_dic['mouth_lower_lip_right_contour3']
+    upperleft=landmark_dic['left_eye_upper_left_quarter']
+    lowerright=landmark_dic['left_eye_lower_right_quarter']
     
 
     upperleft_x=upperleft['x']
@@ -40,32 +40,26 @@ def lipcut(filepath):
 
 
 
-def lip(filepath):
+def eye(filepath):
     
 
     #导入模板
-    springtem = Image.open('template/lip_tem_spring.jpg')
-    summertem = Image.open('template/lip_tem_summer.jpeg')
-    falltem = Image.open('template/lip_tem_fall.png')
-    wintertem = Image.open('template/lip_tem_winter.jpeg')
+    springtem = Image.open('template/eye_tem_spring.jpg')
+    summertem = Image.open('template/eye_tem_summer.jpg')
+    falltem = Image.open('template/eye_tem_fall.jpg')
+    wintertem = Image.open('template/eye_tem_winter.jpg')
 
     #导入被测试图片
-    testim=lipcut(filepath)
+    testim=eyecut(filepath)
 
     #得出与模板相似度
-    avg_tem_sim=44.7548911322
+    avg_tem_sim=50.6877155653
+    
     spring_similar_avg=avg_similar.similar(springtem,testim,avg_tem_sim)
     summer_similar_avg=avg_similar.similar(summertem,testim,avg_tem_sim)
     fall_similar_avg=avg_similar.similar(falltem,testim,avg_tem_sim)
     winter_similar_avg=avg_similar.similar(wintertem,testim,avg_tem_sim)
 
-    '''
-    hist_tem_sim=0.573661851093
-    spring_similar_hist=hist_similar.similar(springtem,testim,hist_tem_sim)
-    summer_similar_hist=hist_similar.similar(summertem,testim,hist_tem_sim)
-    fall_similar_hist=hist_similar.similar(falltem,testim,hist_tem_sim)
-    winter_similar_hist=hist_similar.similar(wintertem,testim,hist_tem_sim)
-    '''
 
     #均值法结果集
     avg_result_list=[]
@@ -73,15 +67,7 @@ def lip(filepath):
     avg_result_list.append(summer_similar_avg)
     avg_result_list.append(fall_similar_avg)
     avg_result_list.append(winter_similar_avg)
-    '''
-    #直方图相似度法结果集
-    hist_result_list=[]
-    hist_result_list.append(spring_similar_hist)
-    hist_result_list.append(summer_similar_hist)
-    hist_result_list.append(fall_similar_hist)
-    hist_result_list.append(winter_similar_hist)
-    
-    '''
+
 
 
     
@@ -90,12 +76,10 @@ def lip(filepath):
 
     
     return avg_result_list
-    #print hist_result_list
-    
 
 
 if __name__ == '__main__':
-    filepath=r"testcases/lip_avg_better.jpg"
-    lip(filepath)
+    filepath=r"testcases/eye_avg_better.jpg"
+    eye(filepath)
 
 
