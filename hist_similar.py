@@ -32,7 +32,7 @@ def similar(image1,image2,tem_sim):
     q=np.array(image2_hist)
     #巴氏系数BC
     BC=np.sum(np.sqrt(p*q))
-    
+    print BC
     #巴氏系数法结果集处理（减去最大模板相似度）
     
     #tem_sim=0.573661851093
@@ -46,7 +46,6 @@ def similar(image1,image2,tem_sim):
     
     
     return BC
-    #print BC
 
 
 

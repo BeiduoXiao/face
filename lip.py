@@ -51,28 +51,29 @@ def lip(filepath):
 
     #导入被测试图片
     testim=lipcut(filepath)
-
+    
     #得出与模板相似度
     avg_tem_sim=44.7548911322
     spring_similar_avg=avg_similar.similar(springtem,testim,avg_tem_sim)
     summer_similar_avg=avg_similar.similar(summertem,testim,avg_tem_sim)
     fall_similar_avg=avg_similar.similar(falltem,testim,avg_tem_sim)
     winter_similar_avg=avg_similar.similar(wintertem,testim,avg_tem_sim)
-
+    
     '''
     hist_tem_sim=0.573661851093
     spring_similar_hist=hist_similar.similar(springtem,testim,hist_tem_sim)
     summer_similar_hist=hist_similar.similar(summertem,testim,hist_tem_sim)
     fall_similar_hist=hist_similar.similar(falltem,testim,hist_tem_sim)
     winter_similar_hist=hist_similar.similar(wintertem,testim,hist_tem_sim)
+    
     '''
-
     #均值法结果集
     avg_result_list=[]
     avg_result_list.append(spring_similar_avg)
     avg_result_list.append(summer_similar_avg)
     avg_result_list.append(fall_similar_avg)
     avg_result_list.append(winter_similar_avg)
+    
     '''
     #直方图相似度法结果集
     hist_result_list=[]
@@ -88,9 +89,10 @@ def lip(filepath):
 
 
 
-    
+    print avg_result_list
     return avg_result_list
-    #print hist_result_list
+   
+    
     
 
 

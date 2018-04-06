@@ -52,31 +52,41 @@ for i in range(256):
 
 
 #导入模板
-springtem = Image.open('template/11.jpg')
-summertem = Image.open('template/22.jpg')
-falltem = Image.open('template/33.jpg')
-wintertem = Image.open('template/44.jpg')
+springtem = Image.open('template/lip_tem_spring.jpg')
+summertem = Image.open('template/lip_tem_summer.jpeg')
+falltem = Image.open('template/lip_tem_fall.png')
+wintertem = Image.open('template/lip_tem_winter.jpeg')
 
 
-#test = lipcut('testcases/lip_test_summer.jpg')
+test = lipcut('testcases/lip_test_summer.jpg')
 
 size = (50,50)
 springtem = springtem.resize(size).convert('L')
 summertem = summertem.resize(size).convert('L')
 falltem = falltem.resize(size).convert('L')
 wintertem = wintertem.resize(size).convert('L')
-#test = test.resize(size).convert('L')
+test = test.resize(size).convert('L')
+
+
 
 #产生直方图(测试用)
 springtem_hisg=randomization(springtem.histogram())
 summertem_hisg=randomization(summertem.histogram())
 falltem_hisg=randomization(falltem.histogram())
 wintertem_hisg=randomization(wintertem.histogram())
-#test_hisg=randomization(test.histogram())
+test_hisg=randomization(test.histogram())
 
-pl.plot(x,summertem_hisg,color='green')
-pl.plot(x,falltem_hisg,color='red')
-pl.plot(x,springtem_hisg,color='yellow')
-pl.plot(x,wintertem_hisg,color='black')
-#pl.plot(x,test_hisg,color='blue')
+
+linesummer, =pl.plot(x,summertem_hisg,color='green')
+linefall, =pl.plot(x,falltem_hisg,color='red')
+linespring, =pl.plot(x,springtem_hisg,color='yellow')
+linewinter, =pl.plot(x,wintertem_hisg,color='black')
+linetest, =pl.plot(x,test_hisg,color='blue')
+
+
+l1 = pl.legend([linespring, linesummer,linefall,linewinter,linetest], ["SpringTemplate", "SummerTemplate","FallTemplate","WinterTemplate","TestImage"], loc=1)  
+  
+
+pl.gca().add_artist(l1)  
+
 pl.show()
