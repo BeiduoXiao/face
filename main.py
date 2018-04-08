@@ -36,5 +36,5 @@ def main(filepath):
     print total_list
 
 if __name__ == '__main__':
-    filepath='testcases/1111.jpeg'
+    filepath='testcases/summer.jpeg'
     main(filepath)

@@ -8,7 +8,7 @@ import hist_similar
 
 
 
-def lipcut(filepath):
+def eyecut(filepath):
 
     apiresponse=fppapi.fppapi(filepath)
     get_dic=json.loads(apiresponse)
@@ -19,8 +19,8 @@ def lipcut(filepath):
     #'landmark' is a dict
     landmark_dic=list_dic['landmark']
     #keys of landmark_dic : all 83 landmarks https://www.faceplusplus.com.cn/landmarks/#demo
-    upperleft=landmark_dic['mouth_upper_lip_left_contour2']
-    lowerright=landmark_dic['mouth_lower_lip_right_contour3']
+    upperleft=landmark_dic['left_eye_upper_left_quarter']
+    lowerright=landmark_dic['left_eye_lower_right_quarter']
     
 
     upperleft_x=upperleft['x']
@@ -35,6 +35,7 @@ def lipcut(filepath):
     region = im.crop((upperleft_x, upperleft_y, lowerright_x, lowerright_y))
     #region是裁剪后的image对象
     return region
+
 def randomization(hist):
     randomization_hist=[]
     
@@ -44,7 +45,6 @@ def randomization(hist):
 
     return randomization_hist
 
-
 #横坐标（灰度图像）
 x=[]
 for i in range(256):
@@ -52,13 +52,13 @@ for i in range(256):
 
 
 #导入模板
-springtem = Image.open('template/lip_tem_spring.jpg')
-summertem = Image.open('template/lip_tem_summer.jpeg')
-falltem = Image.open('template/lip_tem_fall.png')
-wintertem = Image.open('template/lip_tem_winter.jpeg')
+springtem = Image.open('template/eye_tem_spring.jpg')
+summertem = Image.open('template/eye_tem_summer.jpg')
+falltem = Image.open('template/eye_tem_fall.jpg')
+wintertem = Image.open('template/eye_tem_winter.jpg')
 
 
-test = lipcut('testcases/lip_test_summer.jpg')
+test = eyecut('testcases/eye_test_winter.jpeg')
 
 size = (50,50)
 springtem = springtem.resize(size).convert('L')

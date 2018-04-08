@@ -74,12 +74,12 @@ def eye(filepath):
 
 
 
-    
+    #print avg_result_list
     return avg_result_list
 
 
 if __name__ == '__main__':
-    filepath=r"testcases/eye_avg_better.jpg"
+    filepath=r"testcases/eye_test_fall.jpg"
     eye(filepath)
 
 

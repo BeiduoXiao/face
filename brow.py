@@ -74,12 +74,12 @@ def brow(filepath):
 
 
 
-    
+    #print avg_result_list
     return avg_result_list
 
 
 if __name__ == '__main__':
-    filepath=r"testcases/333.jpg"
+    filepath=r"testcases/brow_test_fall.jpg"
     brow(filepath)
 
 

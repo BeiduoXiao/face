@@ -81,8 +81,8 @@ def similar(image1,image2,tem_sim):
     else:
         avg_similar=avg_similar
     
-    print gl_avg1
-    print gl_avg2
+    #print gl_avg1
+    #print gl_avg2
     return avg_similar
     #print avg_similar
     

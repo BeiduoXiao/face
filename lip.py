@@ -89,7 +89,7 @@ def lip(filepath):
 
 
 
-    print avg_result_list
+    #print avg_result_list
     return avg_result_list
    
     
@@ -97,7 +97,7 @@ def lip(filepath):
 
 
 if __name__ == '__main__':
-    filepath=r"testcases/lip_avg_better.jpg"
+    filepath=r"testcases/lip_test_spring.jpeg"
     lip(filepath)
 
 

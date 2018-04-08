@@ -73,13 +73,13 @@ def skin(filepath):
     
 
 
-
+    #print avg_result_list
     
     return avg_result_list
 
 
 if __name__ == '__main__':
-    filepath=r"testcases/888.jpg"
+    filepath=r"testcases/skin_test_fall.jpg"
     skin(filepath)
 
 
