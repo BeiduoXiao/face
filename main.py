@@ -28,12 +28,27 @@ def main(filepath):
     #winter
     total_list[3]=lipcoe*lip_similar[3]+skincoe*skin_similar[3]+browcoe*brow_similar[3]+eyecoe*eye_similar[3]
     
+    max_index= total_list.index(max(total_list))
+    season=" "
+    
+    if max_index==0:
+        season="春季型"
+    elif max_index==1:
+        season="夏季型"
+    elif max_index==2:
+        season="春季型"
+    else:
+        season="冬季型"
+
     print "嘴：%s"%(lip_similar)
     print "肤：%s"%(skin_similar)
     print "眉：%s"%(brow_similar)
     print "眼：%s"%(eye_similar)
     
     print total_list
+
+    result=[lip_similar,skin_similar,brow_similar,eye_similar,total_list]
+    return result
 
 if __name__ == '__main__':
     filepath='testcases/summer.jpeg'

@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 
 
-def draw(result_list,s):
+def draw(result_list,p):
     
     datalist=[]
     for i in result_list:
@@ -34,7 +34,7 @@ def draw(result_list,s):
     ax = fig.add_subplot(111, polar=True)
     ax.plot(angles, data, 'ro-', linewidth=2)
     ax.set_thetagrids(angles * 180/np.pi, labels)
-    ax.set_title("%s", va='bottom')%(s)
+    ax.set_title("part: %s", va='bottom')%(p)
     ax.grid(True)
     plt.show()
     return fig
@@ -45,5 +45,5 @@ def draw(result_list,s):
 if __name__ == '__main__':
    
     result_list=[0.789266205454602, 0.9061880420024436, 0.8838422369872387, 0.31063851015226257]
-    s="眼睛"
+    s="eye"
     draw(result_list,s)

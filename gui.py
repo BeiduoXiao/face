@@ -3,56 +3,77 @@ from tkinter import *
 from tkinter import filedialog
 from PIL import Image, ImageTk
 import wx 
+import main
+import radar 
+
+
+#"选择一张图片"按钮的点击事件
+def printcoords():
+    #File就是所选图片的路径
+    global File 
+    File = filedialog.askopenfilename(parent=root, initialdir="C:/",title='Choose an image.')
+    #print File
+    image=Image.open(File)
+    image=image.resize((300,400))
+    filename = ImageTk.PhotoImage(image)
+    canvas.image = filename  
+    canvas.create_image(0,0,anchor='nw',image=filename)
+
+
+#“测试”按钮的点击事件
+def test():
+
+    #新窗口
+    root = Toplevel()
+    root.geometry('1280x600')
+    
+    #分区域的季节类型结果展示画布
+    cv_parts = Canvas(root, bg = 'red', width = 640, height = 480) 
+    cv_parts.grid(row=0, column=0)
+    
+    #计算
+    result=main.main(File)
+    #解析结果集并绘图
+    radar.radar_part(result[0],result[1],result[2],result[3])
+    
+    radar_part_im=Image.open("radar_part.png")
+    radar_part_im=radar_part_im.resize((640,480))
+    filename = ImageTk.PhotoImage(radar_part_im)
+    cv_parts.image = filename
+    cv_parts.create_image(0,0,anchor='nw',image=filename)
+
+    
+    
+    #综合结果展示画布
+    cv_total = Canvas(root, bg = 'red', width = 640, height = 480) 
+    cv_total.grid(row=0, column=1)
+
+    #解析结果集并绘图
+    radar.radar_total(result[4])
+    
+    radar_total_im=Image.open("radar_total.png")
+    radar_total_im=radar_total_im.resize((640,480))
+    filename = ImageTk.PhotoImage(radar_total_im)
+    cv_parts.image = filename
+    cv_parts.create_image(0,0,anchor='nw',image=filename)
+
+    #文字区域
+    lb=Label(root, text='您所属的季节类型是：',font=('Arial', 30))
+    lb.grid(row=1,column=0,sticky="e")
+    lb=Label(root, text='春季型',font=('Arial', 30))
+    lb.grid(row=1,column=1,sticky="nw")
+    root.mainloop()
+
 
 if __name__ == "__main__":
     root = Tk()
-    root.geometry('300x300')
-    canvas= Canvas(root, bg = 'red', width = 99, height = 99)
+    root.geometry('500x500')
+    canvas= Canvas(root, bg = 'white', width = 300, height = 400)
     canvas.pack()
-    #setting up a tkinter canvas with scrollbars
-    #frame = Frame(root, bd=2, relief=SUNKEN)
-    #frame.grid_rowconfigure(0, weight=1)
-    #frame.grid_columnconfigure(0, weight=1)
-    #xscroll = Scrollbar(frame, orient=HORIZONTAL)
-    #xscroll.grid(row=1, column=0, sticky=E+W)
-    #yscroll = Scrollbar(frame)
-    #yscroll.grid(row=0, column=1, sticky=N+S)
-    #canvas = Canvas(frame, bd=0, xscrollcommand=xscroll.set, yscrollcommand=yscroll.set)
-    #canvas.grid(row=0, column=0, sticky=N+S+E+W)
-    #xscroll.config(command=canvas.xview)
-    #yscroll.config(command=canvas.yview)
-    #frame.pack(fill=BOTH,expand=1)
 
-
-    #function to be called when mouse is clicked
-    def printcoords():
-        #File就是所选图片的路径
-        File = filedialog.askopenfilename(parent=root, initialdir="C:/",title='Choose an image.')
-        #print File
-        image=Image.open(File)
-        image=image.resize((100,100))
-        filename = ImageTk.PhotoImage(image)
-        canvas.image = filename  # <--- keep reference of your image
-        canvas.create_image(0,0,anchor='nw',image=filename)
     
-    def test():
     
- 
-        root = Tk()
-        root.geometry('300x300')
-        cv = Canvas(root, bg = 'red', width = 100, height = 100) 
-        cv.grid(row=0, column=0)
-        cv2 = Canvas(root, bg = 'red', width = 100, height = 100) 
-        cv2.grid(row=0, column=1)
-        cv3 = Canvas(root, bg = 'red', width = 100, height = 100) 
-        cv3.grid(row=1, column=0)
-        cv4 = Canvas(root, bg = 'red', width = 100, height = 100) 
-        cv4.grid(row=1, column=1)
-        lb=Label(root, text='Hello, world!')
-        lb.grid(row=0, column=4)
-        root.mainloop()
-    
-    Button(root,text='选择一张图片',command=printcoords).pack()
-    Button(root,text='测试',command=test).pack()
+    Button(root,text='选择一张照片',command=printcoords).pack()
+    Button(root,text='测试季节类型',command=test).pack()
     root.mainloop()
 
