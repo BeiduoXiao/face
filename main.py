@@ -30,13 +30,14 @@ def main(filepath):
     
     max_index= total_list.index(max(total_list))
     season=" "
-    
+
+
     if max_index==0:
         season="春季型"
     elif max_index==1:
         season="夏季型"
     elif max_index==2:
-        season="春季型"
+        season="秋季型"
     else:
         season="冬季型"
 
@@ -45,11 +46,14 @@ def main(filepath):
     print "眉：%s"%(brow_similar)
     print "眼：%s"%(eye_similar)
     
-    print total_list
-
-    result=[lip_similar,skin_similar,brow_similar,eye_similar,total_list]
+    print "总：%s"%(total_list)
+    print "季节类型：%s"%(season)
+    result=[lip_similar,skin_similar,brow_similar,eye_similar,total_list,season]
+    
     return result
 
+
+
 if __name__ == '__main__':
-    filepath='testcases/summer.jpeg'
+    filepath='testcases/lip_test_fall.jpg'
     main(filepath)
