@@ -10,8 +10,6 @@ def main(filepath):
     brow_similar=brow.brow(filepath)
     eye_similar=eye.eye(filepath)
     
-    
-    
     total_list=[0,0,0,0]
     
     lipcoe=0.40
